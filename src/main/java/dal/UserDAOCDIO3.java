@@ -27,7 +27,7 @@ public class UserDAOCDIO3 implements IUserDAO {
 
             for (int n=0 ; n < user.getRoles().size() ; n++) {
                 statement = c.prepareStatement(
-                        "INSERT INTO jobs (userID, job) VALUES (LAST_INSERT_ID(), ?);");
+                        "INSERT INTO cdio3_jobs (userID, job) VALUES (LAST_INSERT_ID(), ?);");
                 statement.setString(1, user.getRoles().get(n));
                 statement.executeUpdate();
             }
@@ -42,7 +42,7 @@ public class UserDAOCDIO3 implements IUserDAO {
 
        try (Connection c = createConnection()){
            PreparedStatement statement = c.prepareStatement(
-                   "SELECT * FROM cdio3_users NATURAL JOIN jobs WHERE userID = ?;");
+                   "SELECT * FROM cdio3_users NATURAL JOIN cdio3_jobs WHERE userID = ?;");
            statement.setInt(1, userId);
            ResultSet resultSet = statement.executeQuery();
 
@@ -65,7 +65,7 @@ public class UserDAOCDIO3 implements IUserDAO {
 
         try (Connection c = createConnection()){
             PreparedStatement statement = c.prepareStatement(
-                    "SELECT * FROM cdio3_users NATURAL JOIN jobs ORDER BY userID;");
+                    "SELECT * FROM cdio3_users NATURAL JOIN cdio3_jobs ORDER BY userID;");
             ResultSet resultSet = statement.executeQuery();
 
             List<IUserDTO> userList = new ArrayList<>();
@@ -95,13 +95,13 @@ public class UserDAOCDIO3 implements IUserDAO {
             statement.executeUpdate();
 
             statement = c.prepareStatement(
-                    "DELETE FROM jobs WHERE userID = ?;");
+                    "DELETE FROM cdio3_jobs WHERE userID = ?;");
             statement.setInt(1, user.getUserId());
             statement.executeUpdate();
 
             for (int n=0 ; n < user.getRoles().size() ; n++) {
                 statement = c.prepareStatement(
-                        "INSERT INTO jobs (userID, job) VALUES (?, ?);");
+                        "INSERT INTO cdio3_jobs (userID, job) VALUES (?, ?);");
                 statement.setInt(1, user.getUserId());
                 statement.setString(2, user.getRoles().get(n));
                 statement.executeUpdate();

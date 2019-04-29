@@ -1,5 +1,9 @@
+import dal.IUserDAO;
+import ui.TUI;
+
 public class main {
-    public static void main(String[] args) {
-        System.out.println("Heyy");
+    public static void main(String[] args) throws IUserDAO.DALException {
+        TUI t = new TUI();
+        t.run();
     }
 }
