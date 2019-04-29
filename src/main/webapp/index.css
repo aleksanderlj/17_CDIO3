@@ -1,0 +1,13 @@
+input{
+    border-radius: 16px;
+    height: 25px;
+    text-align: left;
+}
+th{
+    text-align: left;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
