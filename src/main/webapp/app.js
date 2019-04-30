@@ -49,6 +49,7 @@ function getNextUserID(){
 }
 
 function makeRoles(){
+    //TODO optional: simplify this method
     var roles = '';
     var admin = false;
     var inputElements = document.getElementsByClassName('admin');
