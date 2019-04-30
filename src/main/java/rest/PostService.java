@@ -7,7 +7,7 @@ import javax.ws.rs.Path;
 public class PostService {
 
     @POST
-    public String postPuhsket(){
-        return "puhsket";
+    public String postPushet(){
+        return "pushet";
     }
 }

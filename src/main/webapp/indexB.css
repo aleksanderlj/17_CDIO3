@@ -5,6 +5,8 @@ body {
     text-align: -webkit-center;
 }
 input, select, button, checkbox{
+    box-shadow: none;
+    text-shadow: none;
     vertical-align: inherit;
     border-radius: 2px;
     height: 20px;
