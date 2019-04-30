@@ -10,6 +10,9 @@ function login() {
         show('#admin');
         hide('#login');
 }
+function createUser() {
+
+}
 function show(element) {
     $(element).show();
 }

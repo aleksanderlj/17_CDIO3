@@ -76,30 +76,20 @@
 
 
 <div id="opretBruger">
+    <a onclick="show('#admin'); hide('#opretBruger');">Tilbage </a>
     <h1> Opret bruger</h1>
-    Bruger id: 3 <br>
-    BrugerNavn:
-    <input type="text" name="user">
+    User ID: <br>
+    Username:
+    <input type="text" name="userName"><br>
+    Initials:
+    <input type="text" name="ini"><br>
+    Role: <br>
+    <input type="checkbox" name="myCheckBox" value="bruger"> Bruger
+    <input type="checkbox" name="myCheckBox2" value="Admin"> Admin
 
     <br>
-    Fornavn:
-    <input type="text" name="name">
 
-    <br>
-    Efternavn:
-    <input type="text" name="efternavn">
-
-    <br> Rolle
-    <input type="radio" name="rolle" value="Administator"> Administator
-    <input type="radio" name="rolle" value="Bruger"> Bruger
-    <br>
-
-    Aktiv
-    <input type="radio" name="aktiv" value="Yes"> Yes
-    <input type="radio" name="aktiv" value="No"> No
-    <br>
-
-    <input type="submit" value="Opret Bruger" onclick="show('#admin'); hide('#opretBruger');">
+    <input type="submit" value="Create" onclick="show('#admin'); hide('#opretBruger'); createUser()">
 </div>
 
 
