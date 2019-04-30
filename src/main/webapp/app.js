@@ -88,25 +88,25 @@ function makeRoles(){
         }
     }
     if(admin==true){
-        roles += 'admin';
+        roles += 'Admin';
         if(counter>=1){
             roles+= ', ';
         }
     }
     if(pharmaceut==true){
-        roles += 'pharmaceut';
+        roles += 'Pharmaceut';
         if(counter>=1){
             roles+= ', ';
         }
     }
     if(produktionsleder==true){
-        roles += 'produktionsleder';
+        roles += 'Produktionsleder';
         if(counter>=1){
             roles+= ', ';
         }
     }
     if(laborant==true){
-        roles += 'laborant';
+        roles += 'Laborant';
         if(counter>=1){
             roles+= ', ';
         }
