@@ -1,9 +1,9 @@
 function addRow() {
 
-    var userID = document.getElementById("userID");
+    var userID = getNextUserID();
     var username = document.getElementById("username");
     var initials = document.getElementById("initials");
-    var roles = getRoles();
+    var roles = makeRoles();
 
     var table = document.getElementById("myTableData");
 
@@ -18,8 +18,37 @@ function addRow() {
 
 
 }
-
+function getInitials(){
+    var initials = null;
+    //TODO return initials from database
+    //TODO and insert function at line 16
+    return initials;
+}
+function getUsername(){
+    var username = null;
+    //TODO return username from database
+    //TODO and insert function at line 15
+    return username;
+}
 function getRoles(){
+    var roles = null;
+    //TODO return roles from database
+    //TODO and insert function at line 17
+    return roles;
+}
+function getUserID(){
+ var userID = null;
+ //TODO return userID from database
+    //TODO and insert function at line 14
+    return userID;
+}
+function getNextUserID(){
+    var userID = 0;
+    //TODO return next userID from database
+    return userID;
+}
+
+function makeRoles(){
     var roles = '';
     var admin = false;
     var inputElements = document.getElementsByClassName('admin');
@@ -89,15 +118,11 @@ function getRoles(){
 }
 
 function deleteRow(obj) {
-
     var index = obj.parentNode.parentNode.rowIndex;
     var table = document.getElementById("myTableData");
     table.deleteRow(index);
-
 }
 
 function load() {
-
     console.log("Page load finished");
-
 }
