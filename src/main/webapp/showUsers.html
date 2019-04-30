@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML dynamic table using JavaScript</title>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="indexB.css">
+</head>
+<body onload="load()">
+<div id="myform">
+    <b><h1>Form...</h1></b>
+    <table id="userID" value="0">
+        <tr>
+            <td>username:</td>
+            <td><input type="text" id="username"></td>
+        </tr>
+        <tr>
+            <td>initials:</td>
+            <td><input type="text" id="initials"></td>
+        </tr>
+
+        <tr>
+            <td>Admin</td>
+            <td>
+                <input type="checkbox" class="admin" value = "1">
+            </td>
+            </tr>
+        <tr>
+            <td>Pharmaceut</td>
+            <td>
+                <input type="checkbox" class="pharmaceut" value ="2">
+            </td>
+        </tr>
+        <tr>
+            <td>Produktionsleder</td>
+            <td>
+                <input type="checkbox" class="produktionsleder" value = "3">
+            </td>
+        </tr>
+        <tr>
+            <td>Laborant</td>
+            <td>
+                <input type="checkbox" class="laborant" value = "4">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" id="add" value="Add" onclick="Javascript:addRow()"></td>
+            </td>
+        </tr>
+                <!--<select>
+                <option value="Admin">Admin</option>
+                <option value="Pharmaceut">Pharmaceut</option>
+                <option value="Produktionsleder">Produktionsleder</option>
+                <option value="Laborant">Laborant</option>
+            </select>-->
+    </table>
+</div>
+<div id="mydata">
+    <b><h2>from the database...</h2></b>
+    <table id="myTableData"  border="1" cellpadding="2">
+        <tr>
+            <td>&nbsp;</td>
+            <td><b>userID</b></td>
+            <td><b>username</b></td>
+            <td><b>initials</b></td>
+            <td><b>roles</b></td>
+        </tr>
+    </table>
+    &nbsp;
+</div>
+</body>
+</html>
