@@ -2,96 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bruger Administration</title>
+    <title>Title</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="index.js"></script>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="indexA.css">
 </head>
 <body>
+<div id="maincontainer">
 
-
-<div id="login">
-    <h1>Log ind</h1>
-
-    Username:
-    <input type="text" name="user" id="loginUser">
-
-    <br>
-    Password:
-    <input type="password" name="password" id="loginPass">
-
-    <input type="submit" value="Login" onclick="login()">
-
-
-    <img src="http://proventilation.dk/wp-content/uploads/2018/05/DTU-logo.png" height="140" width="320">
 </div>
-
-
-<div id="admin">
-    <a href="#Administration">Bruger Administration</a> | |
-    <a onclick="show('#login'); hide('#admin');">Log ud</a>
-
-    <h1 id="Administration">Bruger Administration</h1>
-
-    <a onclick="show('#opretBruger'); hide('#admin');">Opret ny bruger </a>
-    <br>
-    <br>
-    <table style="width:100%">
-        <tr>
-            <th>BrugerID</th>
-            <th>BrugerNavn</th>
-            <th>Rolle</th>
-            <th>Fornavn</th>
-            <th>Vej</th>
-            <th>Adresse Nummer</th>
-            <th>Postnummer</th>
-            <th>By</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Jill500</td>
-            <td>Bruger</td>
-            <td>Jill</td>
-            <td>Lyngbyvej</td>
-            <td>500</td>
-            <td>3000</td>
-            <td>Lyngby</td>
-            <td><a>Slet bruger</a></td>
-
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Jackson95</td>
-            <td>Administator</td>
-            <td>Eve</td>
-            <td>Lyngbyvej</td>
-            <td>500</td>
-            <td>3000</td>
-            <td>Lyngby</td>
-            <td><a>Slet bruger</a></td>
-
-        </tr>
-    </table>
-</div>
-
-
-<div id="opretBruger">
-    <a onclick="show('#admin'); hide('#opretBruger');">Tilbage </a>
-    <h1> Opret bruger</h1>
-    User ID: <br>
-    Username:
-    <input type="text" name="userName"><br>
-    Initials:
-    <input type="text" name="ini"><br>
-    Role: <br>
-    <input type="checkbox" name="myCheckBox" value="bruger"> Bruger
-    <input type="checkbox" name="myCheckBox2" value="Admin"> Admin
-
-    <br>
-
-    <input type="submit" value="Create" onclick="show('#admin'); hide('#opretBruger'); createUser()">
-</div>
-
-
 </body>
 </html>
