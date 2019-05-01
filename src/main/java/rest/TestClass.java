@@ -1,17 +1,23 @@
 package rest;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class TestClass {
-    private String id;
-    private String name;
-    private String amount;
+    @XmlElement private String id;
+    @XmlElement private String name;
+    @XmlElement private String amount;
 
     TestClass(){}
 
+    /*
     TestClass(String id, String name, String amount){
         this.id = id;
         this.name = name;
         this.amount = amount;
     }
+    */
 
     public void setId(String id) {
         this.id = id;

@@ -1,7 +1,13 @@
 package rest;
 
+import dal.IUserDAO;
+import dal.UserDAOCDIO3;
+import dal.dto.UserDTO;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("hello")
 //@Consumes(MediaType.APPLICATION_JSON)
@@ -15,13 +21,46 @@ public class HelloService {
 
 
     /*
-    @POST
+    //@POST
+    //@Path("formjson")
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean postHello(String id, String name, String amount){
+    public boolean postJSON(String id, String name, String amount){
         TestClass tc = new TestClass(id, name, amount);
         return true;
     }
     */
+
+    @POST
+    @Path("mysql")
+    public String postMysql(String input) throws IUserDAO.DALException {
+        UserDAOCDIO3 db = new UserDAOCDIO3();
+        UserDTO user = new UserDTO();
+        user.setUserName("Mads");
+        user.setIni("sfidon");
+        List roles = new ArrayList<String>();
+        roles.add("Admin");
+        user.setRoles(roles);
+        db.createUser(user);
+
+        return "Mysql " + input;
+    }
+
+
+    @POST
+    @Path("postclass")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String postClass(TestClass tc){
+        //TestClass tc = new TestClass(id, name, amount);
+        return tc.getName();
+    }
+
+
+    @POST
+    @Path("normal")
+    public String postDefault(String input){
+        return "You wrote " + input;
+    }
 
     @POST
     @Path("form")
