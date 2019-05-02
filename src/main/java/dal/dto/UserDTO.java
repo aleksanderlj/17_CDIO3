@@ -17,6 +17,16 @@ public class UserDTO implements Serializable, IUserDTO {
     public UserDTO() {
         this.roles = new ArrayList<>();
     }
+    public UserDTO createTestDTO(){
+        this.userId=50;
+        this.userName="Test";
+        this.ini="T";
+        List role = new ArrayList<>();
+        role.add("Admin");
+        this.roles = role;
+        return this;
+    }
+
     //Getters and Setters
     @Override
     public int getUserId() {

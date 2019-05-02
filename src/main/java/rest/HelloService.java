@@ -2,17 +2,41 @@ package rest;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import dal.IUserDAO;
+import dal.UserDAOCDIO3;
+import dal.dto.IUserDTO;
+import dal.dto.UserDTO;
 
 @Path("hello")
 //@Consumes(MediaType.APPLICATION_JSON)
 //@Produces(MediaType.APPLICATION_JSON)
 public class HelloService {
+    private IUserDAO userDAO;
+    private UserDTO user;
 
     @GET
     public String getHello(){
         return "Du er i helloservice";
     }
 
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void useSQL(String ) throws IUserDAO.DALException{
+
+        userDAO = new UserDAOCDIO3();
+        user = new UserDTO();
+        UserDTO test = user.createTestDTO();
+        userDAO.createUser(test);
+    }
+    /*
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public boolean postHello(String id, String name, String amount){
+        TestClass tc = new TestClass(id, name, amount);
+        return true;
+    }
+    */
 
     /*
     @POST
@@ -76,20 +100,4 @@ public class HelloService {
             return "oooooooo nooooooo";
         }
     }
-
-    /*
-    @POST
-    public String postHello(
-            @FormParam("postsend1") String name1,
-            @FormParam("postsend2") String name2,
-            @FormParam("postsend3") String name3){
-        return "Du postede: " + name1 + name2 + name3;
-    }
-    */
-    /*
-    @POST
-    public String postHello(String input1, String input2, String input3){
-        return "Du postede: " + input1 + " " + input2 + " " + input3;
-    }
-    */
 }
