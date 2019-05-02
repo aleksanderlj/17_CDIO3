@@ -7,15 +7,23 @@ import java.util.List;
 /**
  * Standard implementation of IUserDTO
  */
+
 public class UserDTO implements Serializable, IUserDTO {
     //Fields
     private int	userId;
     private String userName;
     private String ini;
     private List<String> roles;
+    ArrayList<IUserDTO>list = new ArrayList<>();
     //Constructor
-    public UserDTO() {
+    public UserDTO(){
         this.roles = new ArrayList<>();
+    }
+    public UserDTO(int userId, String userName, String ini, List<String> roles) {
+        this.roles = new ArrayList<>();
+        this.userId = userId;
+        this.userName = userName;
+        this.ini = ini;
     }
     //Getters and Setters
     @Override
@@ -70,7 +78,16 @@ public class UserDTO implements Serializable, IUserDTO {
     public String toString() {
         return "UserDTO [userId=" + userId + ", userName=" + userName + ", ini=" + ini + ", roles=" + roles + "]";
     }
-
-
+    public String userString(IUserDTO user){
+        int Id = user.getUserId();
+        String name = user.getUserName();
+        String ini = user.getIni();
+        String roles="";
+        for(int i = 0; i<user.getRoles().size(); i++){
+            roles+= user.getRoles().get(i)+" ";
+        }
+        String userString = "userId = " + Id + ", username = " + name + ", ini = "+ini+", roles = "+roles;
+        return userString;
+    }
 
 }
