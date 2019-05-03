@@ -38,19 +38,19 @@ public class TransientUI {
             choice = sc.next();
             switch (choice) {
                 case "1":
-                    choice1();
+                    showUser();
                     break;
                 case "2":
-                    choice2();
+                    showAllUsers();
                     break;
                 case "3":
-                    choice3();
+                    createUser();
                     break;
                 case "4":
-                    choice4();
+                    editUser();
                     break;
                 case "5":
-                    choice5();
+                    deleteUser();
                     break;
                 case "6":
                     break label;
@@ -60,29 +60,29 @@ public class TransientUI {
         System.out.println("...Program closed");
         System.exit(0);
     }
-    public void choice1(){
+    public void showUser(){
         System.out.println("Enter userId: ");
         System.out.println(tDAO.getUser(sc.nextInt() - 1).toString());
     }
-    public void choice2(){
+    public void showAllUsers(){
         for (int i = 0; i < tDAO.getUserList().size(); i++) {
             System.out.println(tDAO.getUserList().get(i).toString());
         }
     }
-    public void choice3(){
+    public void createUser(){
         tDAO.createUser(tDAO.getUser(1));
     }
-    public void choice4choice1(int userId){
+    public void newUserName(int userId){
         System.out.println("Enter new username: ");
         String userName = sc.next();
         tDAO.getUser(userId).setUserName(userName);
     }
-    public void choice4choice2(int userId){
-        System.out.println("Enter initials: ");
+    public void newInitials(int userId){
+        System.out.println("Enter new initials: ");
         String initials = sc.next();
         tDAO.getUser(userId).setIni(initials);
     }
-    public void choice4choice3rolechoice2(int userId){
+    public void addRoles(int userId){
         int restart = 0;
         do {
             System.out.println("Enter the number of roles, you want to add: ");
@@ -100,13 +100,13 @@ public class TransientUI {
         }
         while (restart > 0);
     }
-    public void choice4choice3rolechoice1(int userId){
+    public void removeRoles(int userId){
         System.out.println("Enter the role you want to remove: ");
         String roleString = sc.next();
         tDAO.getUser(userId).removeRole(roleString);
     }
 
-    public void choice4choice3(int userId){
+    public void newRoles(int userId){
         while (true) {
             System.out.println("Current roles " + tDAO.getUser(userId).getRoles());
             System.out.println("Role Menu:\n"
@@ -115,15 +115,15 @@ public class TransientUI {
                     + "3. Done\n");
             int roleChoice = sc.nextInt();
             if (roleChoice == 1) {
-                choice4choice3rolechoice1(userId);
+                removeRoles(userId);
             } else if (roleChoice == 2) {
-                choice4choice3rolechoice2(userId);
+                addRoles(userId);
             } else if (roleChoice == 3) {
                 break;
             }
         }
     }
-    public void choice4(){
+    public void editUser(){
         System.out.println("Enter userId");
         int userId = sc.nextInt() - 1;
         while (true) {
@@ -135,23 +135,21 @@ public class TransientUI {
                     + "4. Done\n");
             int choiceof = sc.nextInt();
             if (choiceof == 1) {
-                choice4choice1(userId);
+                newUserName(userId);
             } else if (choiceof == 2) {
-                choice4choice2(userId);
+                newInitials(userId);
 
             } else if (choiceof == 3) {
-               choice4choice3(userId);
+                newRoles(userId);
             } else if (choiceof == 4) {
                 break;
             }
         }
     }
-    public void choice5(){
+    public void deleteUser(){
         System.out.println("Enter userId");
         tDAO.deleteUser(sc.nextInt() - 1);
     }
-
-    int UserIdCounter = 6;
 
     public String setUserName(){
         System.out.println("Enter username: ");
