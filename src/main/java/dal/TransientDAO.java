@@ -3,8 +3,6 @@ package dal;
 import dal.dto.IUserDTO;
 import dal.dto.UserDTO;
 import test.TransientUI;
-
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +30,6 @@ public class TransientDAO implements IUserDAO{
         list.add(Søren);
         list.add(Theodor);
     }
-    Scanner sc = new Scanner(System.in);
     int UserIdCounter = 6;
 
     public void createUser(IUserDTO user){
@@ -53,7 +50,6 @@ public class TransientDAO implements IUserDAO{
     public void updateUser(IUserDTO user){
 
     }
-
     public void deleteUser(int userId){
         list.remove(userId);
     }

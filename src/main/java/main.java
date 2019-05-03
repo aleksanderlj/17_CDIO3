@@ -1,7 +1,4 @@
 import dal.IUserDAO;
-import dal.TransientDAO;
-import dal.dto.IUserDTO;
-import dal.dto.UserDTO;
 import test.TransientUI;
 
 public class main {

@@ -78,16 +78,4 @@ public class UserDTO implements Serializable, IUserDTO {
     public String toString() {
         return "UserDTO [userId=" + userId + ", userName=" + userName + ", ini=" + ini + ", roles=" + roles + "]";
     }
-    public String userString(IUserDTO user){
-        int Id = user.getUserId();
-        String name = user.getUserName();
-        String ini = user.getIni();
-        String roles="";
-        for(int i = 0; i<user.getRoles().size(); i++){
-            roles+= user.getRoles().get(i)+" ";
-        }
-        String userString = "userId = " + Id + ", username = " + name + ", ini = "+ini+", roles = "+roles;
-        return userString;
-    }
-
 }

@@ -7,16 +7,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODONE Rename class so it matches your study-number
 public class UserDAOCDIO3 implements IUserDAO {
-    //TODONE Make a connection to the database
     private Connection createConnection() throws SQLException {
         return  DriverManager.getConnection("jdbc:mysql://ec2-52-30-211-3.eu-west-1.compute.amazonaws.com/s185118?"
                 + "user=s185118&password=SNX64wUCCqEHKNVwEwumg");
     }
 
     @Override
-    public void createUser(IUserDTO user) throws DALException {
+    public void createUser(IUserDTO user){
         try (Connection c = createConnection()) {
 
             PreparedStatement statement = c.prepareStatement(
@@ -84,7 +82,7 @@ public class UserDAOCDIO3 implements IUserDAO {
 
 
     @Override
-    public void updateUser(IUserDTO user) throws DALException {
+    public void updateUser(IUserDTO user){
 
         try (Connection c = createConnection()) {
             PreparedStatement statement = c.prepareStatement(
@@ -113,7 +111,7 @@ public class UserDAOCDIO3 implements IUserDAO {
     }
 
     @Override
-    public void deleteUser(int userId) throws DALException {
+    public void deleteUser(int userId){
 
         try (Connection c = createConnection()) {
             PreparedStatement statement = c.prepareStatement(

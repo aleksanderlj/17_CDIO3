@@ -52,6 +52,11 @@ function makeRoles(){
     //TODO optional: simplify this method
     var roles = '';
     var admin = false;
+    var pharmaceut = false;
+    var produktionsleder = false;
+    var laborant = false;
+    var counter = 0;
+
     var inputElements = document.getElementsByClassName('admin');
     for(var i=0; inputElements[i]; ++i){
         if(inputElements[i].checked){
@@ -59,8 +64,6 @@ function makeRoles(){
             break;
         }
     }
-    var pharmaceut = false;
-    var counter = 0;
     var inputElements = document.getElementsByClassName('pharmaceut');
     for(var i=0; inputElements[i]; ++i){
         if(inputElements[i].checked){
@@ -69,7 +72,6 @@ function makeRoles(){
             break;
         }
     }
-    var produktionsleder = false;
     var inputElements = document.getElementsByClassName('produktionsleder');
     for(var i=0; inputElements[i]; ++i){
         if(inputElements[i].checked){
@@ -78,7 +80,6 @@ function makeRoles(){
             break;
         }
     }
-    var laborant = false;
     var inputElements = document.getElementsByClassName('laborant');
     for(var i=0; inputElements[i]; ++i){
         if(inputElements[i].checked){

@@ -1,9 +1,7 @@
 package test;
-
 import dal.IUserDAO;
 import dal.TransientDAO;
 import dal.dto.IUserDTO;
-import java.util.regex.*;
 import java.util.Scanner;
 
 public class TransientUI {
