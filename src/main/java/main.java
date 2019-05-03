@@ -1,9 +1,9 @@
 import dal.IUserDAO;
-import test.TUI;
+import test.TransientUI;
 
 public class main {
-    public static void main(String[] args) throws IUserDAO.DALException {
-        TUI t = new TUI();
-        t.run();
+    public static void main(String[]args) throws IUserDAO.DALException {
+        TransientUI t = new TransientUI();
+        t.ChooseTorP();
     }
 }
