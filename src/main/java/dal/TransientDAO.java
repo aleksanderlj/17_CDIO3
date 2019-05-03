@@ -37,8 +37,7 @@ public class TransientDAO implements IUserDAO{
 
     public void createUser(IUserDTO user){
         TransientUI t = new TransientUI();
-        IUserDTO model;
-        model = new UserDTO(++UserIdCounter,t.setUserName(),t.setInitials(),null);
+        IUserDTO model = new UserDTO(++UserIdCounter, t.setUserName(), t.setInitials(), null);
         t.setRoles(model);
         list.add(model);
     }
