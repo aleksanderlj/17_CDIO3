@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class TransientDAO implements IUserDAO{
     private ArrayList<IUserDTO> list;
-    private TransientUI t;
     public TransientDAO(){
         this.list = new ArrayList<>();
         IUserDTO Andreas = new UserDTO(1, "Andreas", "AS", null);
@@ -25,7 +24,7 @@ public class TransientDAO implements IUserDAO{
         IUserDTO Søren = new UserDTO(5, "Søren", "SH", null);
         Søren.addRole("Admin");
         IUserDTO Theodor = new UserDTO(6, "Theodor", "TG", null);
-        Theodor.addRole("Pharmacceut");
+        Theodor.addRole("Pharmaceut");
         list.add(Andreas);
         list.add(Aleksander);
         list.add(Josephine);
@@ -33,14 +32,15 @@ public class TransientDAO implements IUserDAO{
         list.add(Søren);
         list.add(Theodor);
     }
-
     Scanner sc = new Scanner(System.in);
     int UserIdCounter = 6;
 
     public void createUser(IUserDTO user){
-        user = new UserDTO(t.setUserID(),t.setUserName(),t.setInitials(),null);
-        t.setRoles(user);
-        list.add(user);
+        TransientUI t = new TransientUI();
+        IUserDTO model;
+        model = new UserDTO(++UserIdCounter,t.setUserName(),t.setInitials(),null);
+        t.setRoles(model);
+        list.add(model);
     }
 
     public IUserDTO getUser(int userId){
