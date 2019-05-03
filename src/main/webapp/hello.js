@@ -39,4 +39,22 @@ $(function() { // Sikrer sig at dokumentet er indlæst,
         });
         return false; //for at undgå at knappen poster data (default behavior).
     });
+
+    $('#testbtn').click(function() { //Sætter en click handler på knappen
+        var testjson = '{"id" : "tre", "name" : "etnavn", "amount" : "mange"}';
+        $.ajax({				 //Indleder et asynkront ajax kald
+            url : 'rest/hello/postclass',	 //specificerer endpointet
+            type : 'POST',	       //Typen af HTTP requestet (GET er default)
+            data : testjson,
+            contentType : 'application/json',
+            dataType : 'text',
+            success : function(data){//Funktion der skal udføres når data er hentet
+                $('#mydiv').html("Stor success"); //Manipulerer #mydiv.
+            },
+            error : function (data) {
+                $('#mydiv').html("Stor fejl");
+            }
+        });
+        return false; //for at undgå at knappen poster data (default behavior).
+    });
 });

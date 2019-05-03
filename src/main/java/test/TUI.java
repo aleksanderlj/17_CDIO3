@@ -4,7 +4,10 @@ import dal.IUserDAO;
 import dal.UserDAOCDIO3;
 import dal.dto.IUserDTO;
 import dal.dto.UserDTO;
+import rest.HelloService;
+import rest.TestClass;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +31,8 @@ public class TUI {
                     + "3. Create user\n"
                     + "4. Edit user\n"
                     + "5. Delete user\n"
-                    + "6. Close program\n");
+                    + "6. Close program\n"
+                    + "7. Test me\n");
 
             choice = sc.nextLine();
 
@@ -78,6 +82,22 @@ public class TUI {
                     break;
 
                 case "6":
+                    break;
+
+                case "7":
+                    UserDAOCDIO3 db = new UserDAOCDIO3();
+                    UserDTO user = new UserDTO();
+                    user.setUserName("Test");
+                    user.setIni("Me");
+                    List roles = new ArrayList<String>();
+                    roles.add("Admin");
+                    user.setRoles(roles);
+                    db.createUser(user);
+                    break;
+
+                case "8":
+                    HelloService hs = new HelloService();
+                    hs.postClass(new TestClass("sda","sad","gd"));
                     break;
             }
 
@@ -218,6 +238,17 @@ public class TUI {
 
 
         return chosenUser;
+    }
+
+    public static void testMethod() throws IUserDAO.DALException {
+        UserDAOCDIO3 db = new UserDAOCDIO3();
+        UserDTO user = new UserDTO();
+        user.setUserName("Test3");
+        user.setIni("Test3");
+        List roles = new ArrayList<String>();
+        roles.add("Admin");
+        user.setRoles(roles);
+        db.createUser(user);
     }
 
 }

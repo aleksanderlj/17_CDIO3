@@ -3,6 +3,7 @@ package rest;
 import dal.IUserDAO;
 import dal.UserDAOCDIO3;
 import dal.dto.UserDTO;
+import test.TUI;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -50,9 +51,14 @@ public class HelloService {
     @Path("postclass")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String postClass(TestClass tc){
-        //TestClass tc = new TestClass(id, name, amount);
+    public String postClass(TestClass tc) throws IUserDAO.DALException {
+    //public String postClass(@FormParam("id") String id, @FormParam("name") String name, @FormParam("amount") String amount){
+    //public String postClass(String id, String name, String amount){
+    //    TestClass tc = new TestClass(id, name, amount);
+        TUI.testMethod();
+
         return tc.getName();
+        //return name;
     }
 
 
