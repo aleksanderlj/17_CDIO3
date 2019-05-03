@@ -2,6 +2,7 @@ package rest;
 
 import dal.IUserDAO;
 import dal.UserDAOCDIO3;
+import dal.dto.IUserDTO;
 import dal.dto.UserDTO;
 import test.TUI;
 
@@ -14,10 +15,27 @@ import java.util.List;
 //@Consumes(MediaType.APPLICATION_JSON)
 //@Produces(MediaType.APPLICATION_JSON)
 public class HelloService {
+    IUserDAO db = new UserDAOCDIO3();
 
     @GET
+    @Path("defaultget")
     public String getHello(){
         return "Du er i helloservice";
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getmysql")
+    public TestClass getMysql() throws IUserDAO.DALException {
+        IUserDTO dbUser = db.getUser(4);
+        return new TestClass(Integer.toString(dbUser.getUserId()), dbUser.getUserName(), dbUser.getIni());
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getjson")
+    public TestClass getJson(){
+        return new TestClass("first", "second", "third");
     }
 
 

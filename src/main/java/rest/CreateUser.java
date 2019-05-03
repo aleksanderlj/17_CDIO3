@@ -5,27 +5,23 @@ import dal.UserDAOCDIO3;
 import dal.dto.IUserDTO;
 import dal.dto.UserDTO;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
-@Path("createuser")
+@Path("useradmin")
 public class CreateUser {
+    IUserDAO db = new UserDAOCDIO3();
 
-    // http://localhost:8080/17_CDIO3_war_exploded/rest/createuser
     @POST
-    public String createUser(@FormParam("userName") String userName,
-                           @FormParam("ini") String ini) throws IUserDAO.DALException {
-        IUserDAO sql = new UserDAOCDIO3();
-        IUserDTO u1 = new UserDTO();
+    @Path("create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void createUser(JSONUser user) throws IUserDAO.DALException {
+        IUserDTO dbUser = new UserDTO();
+        dbUser.setUserName(user.getUsername());
+        dbUser.setIni(user.getInitials());
+        //dbUser.setRoles();
 
-        u1.setUserName(userName);
-        u1.setIni(ini);
-        u1.addRole("Admin");
-
-        sql.createUser(u1);
-
-        //return "Name: " + userName + "\nInitials: " + ini;
-        return u1.getUserName();
+        db.createUser(dbUser);
     }
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User Administration</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="indexB.css">
 </head>
@@ -11,48 +12,48 @@
 
 </div>
 <div id="userAdministration">
-<div id="myform">
+<form id="myform" method="post">
     <b><h1>Create user</h1></b>
     <table id="userID" value="0">
         <tr>
             <td>username:</td>
-            <td><input type="text" id="username"></td>
+            <td><input type="text" name="username"></td>
         </tr>
         <tr>
             <td>initials:</td>
-            <td><input type="text" id="initials"></td>
+            <td><input type="text" name="initials"></td>
         </tr>
 
         <tr>
             <td>Admin</td>
             <td>
-                <input type="checkbox" class="admin" value = "1">
+                <input type="checkbox" class="Admin" value = "1">
             </td>
             </tr>
         <tr>
             <td>Pharmaceut</td>
             <td>
-                <input type="checkbox" class="pharmaceut" value ="2">
+                <input type="checkbox" class="Pharmaceut" value ="2">
             </td>
         </tr>
         <tr>
             <td>Produktionsleder</td>
             <td>
-                <input type="checkbox" class="produktionsleder" value = "3">
+                <input type="checkbox" class="Produktionsleder" value = "3">
             </td>
         </tr>
         <tr>
             <td>Laborant</td>
             <td>
-                <input type="checkbox" class="laborant" value = "4">
+                <input type="checkbox" class="Laborant" value = "4">
             </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="button" id="add" value="Add" onclick="Javascript:addRow()"></td>
+            <td colspan="2"><input type="submit" id="add" value="Add" onclick="Javascript:addRow()"></td>
             </td>
         </tr>
     </table>
-</div>
+</form>
 <div id="mydata">
     <b><h2>Users in the database</h2></b>
     <table id="myTableData"  border="1" cellpadding="2">

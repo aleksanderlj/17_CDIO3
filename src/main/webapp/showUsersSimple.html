@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>User Administration</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="showUsers.js"></script>
+</head>
+<body>
+<form id="myform" method="post">
+    <input type="text" id="username" name="username">
+    <input type="text" id="initials" name="initials">
+    <input type="checkbox" class="Admin" value = "1">
+    <input type="checkbox" class="Pharmaceut" value ="2">
+    <input type="checkbox" class="Produktionsleder" value = "3">
+    <input type="checkbox" class="Laborant" value = "4">
+    <input type="submit" id="add" value="Add">
+</form>
+
+<div id="userAdministration">
+    <div id="mydata">
+        <b><h2>Users in the database</h2></b>
+        <table id="myTableData"  border="1" cellpadding="2">
+            <tr>
+                <td>&nbsp;</td>
+                <td><b>userID</b></td>
+                <td><b>username</b></td>
+                <td><b>initials</b></td>
+                <td><b>roles</b></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

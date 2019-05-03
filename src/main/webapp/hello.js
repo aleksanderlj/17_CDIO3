@@ -57,4 +57,19 @@ $(function() { // Sikrer sig at dokumentet er indlæst,
         });
         return false; //for at undgå at knappen poster data (default behavior).
     });
+
+    $('#getUser').click(function() { //Sætter en click handler på knappen
+        $.ajax({				 //Indleder et asynkront ajax kald
+            url : 'rest/hello/getjson',	 //specificerer endpointet
+            type : 'GET',	       //Typen af HTTP requestet (GET er default)
+            dataType : 'json',
+            success : function(data){//Funktion der skal udføres når data er hentet
+                $('#usertext').html(data.navn); //Manipulerer #mydiv.
+            },
+            error : function(data){
+                alert("An unexpected error has occured")
+            }
+        });
+        return false; //for at undgå at knappen poster data (default behavior).
+    });
 });

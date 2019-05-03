@@ -11,6 +11,7 @@ public class TestClass {
     private String id;
     private String name;
     private String amount;
+    private String ham;
 
     TestClass(){}
 
@@ -44,5 +45,14 @@ public class TestClass {
 
     public String getAmount() {
         return amount;
+    }
+
+
+    public void setHam(String ham) {
+        this.ham = ham;
+    }
+
+    public String getHam() {
+        return ham;
     }
 }
