@@ -64,10 +64,10 @@ $(function() { // Sikrer sig at dokumentet er indlæst,
             type : 'GET',	       //Typen af HTTP requestet (GET er default)
             dataType : 'json',
             success : function(data){//Funktion der skal udføres når data er hentet
-                $('#usertext').html(data.navn); //Manipulerer #mydiv.
+                $('#usertext').html(data.name); //Manipulerer #mydiv.
             },
             error : function(data){
-                alert("An unexpected error has occured")
+                alert("An unexpected error has occured");
             }
         });
         return false; //for at undgå at knappen poster data (default behavior).

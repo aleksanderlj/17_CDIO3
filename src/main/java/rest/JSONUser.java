@@ -4,14 +4,21 @@ public class JSONUser {
     private String id;
     private String username;
     private String initials;
-    // TODO Noget med roller
+    private String[] roles;
 
     JSONUser(){}
 
-    public JSONUser(String username, String initials){
+    public JSONUser(String username, String initials, String[] roles){
         this.username = username;
         this.initials = initials;
-        // TODO Noget med roller
+        this.roles = roles;
+    }
+
+    public JSONUser(String id, String username, String initials, String[] roles){
+        this.id = id;
+        this.username = username;
+        this.initials = initials;
+        this.roles = roles;
     }
 
     public void setUsername(String username) {
@@ -26,8 +33,9 @@ public class JSONUser {
         this.id = id;
     }
 
-    // TODO set og get roller
-
+    public void setRoles(String[] roles) {
+        this.roles = roles;
+    }
 
     public String getUsername() {
         return username;
@@ -39,5 +47,9 @@ public class JSONUser {
 
     public String getId() {
         return id;
+    }
+
+    public String[] getRoles() {
+        return roles;
     }
 }
