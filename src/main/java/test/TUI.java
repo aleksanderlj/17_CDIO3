@@ -97,7 +97,7 @@ public class TUI {
 
                 case "8":
                     HelloService hs = new HelloService();
-                    hs.postClass(new TestClass("sda","sad","gd"));
+                    //hs.postClass(new TestClass("sda","sad","gd"));
                     break;
             }
 
@@ -243,8 +243,8 @@ public class TUI {
     public static void testMethod() throws IUserDAO.DALException {
         UserDAOCDIO3 db = new UserDAOCDIO3();
         UserDTO user = new UserDTO();
-        user.setUserName("Test3");
-        user.setIni("Test3");
+        user.setUserName("Henrik");
+        user.setIni("Test4");
         List roles = new ArrayList<String>();
         roles.add("Admin");
         user.setRoles(roles);

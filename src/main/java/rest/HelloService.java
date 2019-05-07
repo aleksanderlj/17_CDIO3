@@ -23,6 +23,7 @@ public class HelloService {
         return "Du er i helloservice";
     }
 
+    /*
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getmysql")
@@ -30,12 +31,14 @@ public class HelloService {
         IUserDTO dbUser = db.getUser(4);
         return new TestClass(Integer.toString(dbUser.getUserId()), dbUser.getUserName(), dbUser.getIni());
     }
+    */
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getjson")
     public TestClass getJson(){
-        return new TestClass("first", "second", "third");
+        String[] arr = {"one", "two", "three"};
+        return new TestClass("first", "second", "third", arr);
     }
 
 

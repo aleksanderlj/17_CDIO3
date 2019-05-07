@@ -1,3 +1,4 @@
+/*
 function addRow() {
 
     var userID = getNextUserID();
@@ -128,3 +129,5 @@ function deleteRow(obj) {
 function load() {
     console.log("Page load finished");
 }
+
+ */

@@ -11,15 +11,16 @@ public class TestClass {
     private String id;
     private String name;
     private String amount;
-    private String ham;
+    private String[] ham;
 
     TestClass(){}
 
 
-    public TestClass(String id, String name, String amount){
+    public TestClass(String id, String name, String amount, String[] ham){
         this.id = id;
         this.name = name;
         this.amount = amount;
+        this.ham = ham;
     }
 
 
@@ -48,11 +49,11 @@ public class TestClass {
     }
 
 
-    public void setHam(String ham) {
+    public void setHam(String[] ham) {
         this.ham = ham;
     }
 
-    public String getHam() {
+    public String[] getHam() {
         return ham;
     }
 }

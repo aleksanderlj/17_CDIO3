@@ -64,7 +64,7 @@ $(function() { // Sikrer sig at dokumentet er indlæst,
             type : 'GET',	       //Typen af HTTP requestet (GET er default)
             dataType : 'json',
             success : function(data){//Funktion der skal udføres når data er hentet
-                $('#usertext').html(data.name); //Manipulerer #mydiv.
+                $('#usertext').html("Succ: " + data); //Manipulerer #mydiv.
             },
             error : function(data){
                 alert("An unexpected error has occured");
