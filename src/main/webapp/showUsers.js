@@ -20,7 +20,7 @@ $(function() {
                 addRow(datajsonParsed)
             },
             error : function(data){
-                alert("Please make sure that all information was entered");
+                alert("Upload cancelled:\nPlease make sure that all necessary information was entered");
             }
         });
         return false;
@@ -41,7 +41,7 @@ $(function() {
                 addRow(datajsonParsed);
             },
             error : function(data){
-                alert("An unexpected error occured: UPDATE_ERROR");
+                alert("Update cancelled:\nPlease make sure that all necessary information was entered");
             }
         });
         return false;
