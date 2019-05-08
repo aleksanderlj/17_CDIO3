@@ -4,8 +4,6 @@ import dal.IUserDAO;
 import dal.UserDAOCDIO3;
 import dal.dto.IUserDTO;
 import dal.dto.UserDTO;
-import rest.HelloService;
-import rest.TestClass;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
