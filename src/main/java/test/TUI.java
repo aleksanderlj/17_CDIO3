@@ -24,15 +24,17 @@ public class TUI {
         Scanner stop = new Scanner(System.in);
         IUserDAO userDAO = new UserDAOCDIO3();
         String choice;
+
         do {
-            System.out.println("Menu:\n"
+            System.out.println(
+                    "Menu:\n"
                     + "1. Show user\n"
                     + "2. Show all users\n"
                     + "3. Create user\n"
                     + "4. Edit user\n"
                     + "5. Delete user\n"
                     + "6. Close program\n"
-                    + "7. Test me\n");
+            );
 
             choice = sc.nextLine();
 
@@ -57,7 +59,7 @@ public class TUI {
                     break;
 
                 case "3": // Opret bruger
-                    userDAO.createUser(createUserDTO());
+                    System.out.println(userDAO.createUser(createUserDTO()));
                     break;
 
                 case "4": // Opdater bruger
@@ -82,22 +84,6 @@ public class TUI {
                     break;
 
                 case "6":
-                    break;
-
-                case "7":
-                    UserDAOCDIO3 db = new UserDAOCDIO3();
-                    UserDTO user = new UserDTO();
-                    user.setUserName("Test");
-                    user.setIni("Me");
-                    List roles = new ArrayList<String>();
-                    roles.add("Admin");
-                    user.setRoles(roles);
-                    db.createUser(user);
-                    break;
-
-                case "8":
-                    HelloService hs = new HelloService();
-                    //hs.postClass(new TestClass("sda","sad","gd"));
                     break;
             }
 

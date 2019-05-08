@@ -1,60 +1,53 @@
 $(function() {
+    ajaxGetUserlist();
 
-    // Add user
+    // Add user button
     $('#myform').submit(function(e) {
         e.preventDefault();
         ajaxCreate()});
 
+    // Creates a user from the form
     function ajaxCreate() {
-        //event.preventDefault();
-        //var datajson = $('form#myform').serializeJSON();
-        //var obj = {id: null, username: $('#username').val(), initials: $('#initials').val()};
-        //var datajson = JSON.stringify($('form#myform').serializeArray());
-        var datajson = jsonString();
-        //var datajson2 = JSON.parse(datajson);
+        var datajson = jsonString(null);
+        var datajsonParsed = JSON.parse(datajson);
         $.ajax({
             url : 'rest/useradmin/create',
             type : 'POST',
             data : datajson,
             contentType : 'application/json',
-            //dataType : 'json', //MAYBE!?!?
-            //dataType : "text",
-            //contentType : 'text/plain',
             success : function(data){
-                alert("suc ");
-                addRow(JSON.parse(datajson));
+                datajsonParsed.id = data;
+                addRow(datajsonParsed)
             },
             error : function(data){
-                alert("An unexpected error occured: " + JSON.stringify(datajson));
+                alert("Please make sure that all information was entered");
             }
         });
         return false;
     }
 
-    function ajaxUpdate() {
-        //event.preventDefault();
-        //var datajson = $('form#formid').serializeJSON();
-        //var obj = {id: $('#id').val(), name: $('#name').val(), amount: $('#amount').val()};
-        //var datajson = JSON.stringify($('form#myform').serializeArray());
-        // TODO lav update knap
+    // Updates a user by using the details from the form
+    function ajaxUpdate(id) {
+        var datajson = jsonString(id);
+        var datajsonParsed = JSON.parse(datajson);
         $.ajax({
-            url : 'rest/useradmin/update',
+            url : 'rest/useradmin/updateuser',
             type : 'POST',
             data : datajson,
             contentType : 'application/json',
-            //dataType : 'json', //MAYBE!?!?
-            //contentType : 'text/plain',
             success : function(data){
-                // TODO ændre række i html
-                //addRow(data);
+                var row = document.getElementById("row" + id);
+                row.parentNode.removeChild(row);
+                addRow(datajsonParsed);
             },
             error : function(data){
-                alert("An unexpected error occured");
+                alert("An unexpected error occured: UPDATE_ERROR");
             }
         });
         return false;
     }
 
+    // Gets a user from the database
     function ajaxGet(id) {
         $.ajax({
             url : 'rest/useradmin/getuser/' + id,
@@ -64,52 +57,84 @@ $(function() {
                 addRow(data);
             },
             error : function(data){
-                alert("An unexpected error has occured");
+                alert("An unexpected error has occured: GET_ERROR");
             }
         });
-        return false; //for at undgå at knappen poster data (default behavior).
+        return false;
     }
 
+    // Gets the ID's for all users currently in the database
     function ajaxGetUserlist() {
         $.ajax({
             url : 'rest/useradmin/userlist',
             type : 'GET',
             success : function(data){
-                addUserlist(data);
+                if (data != null) {
+                    addUserlist(data);
+                }
             },
             error : function(data){
-                alert("An unexpected error has occured");
+                alert("An unexpected error has occured: USERLIST_ERROR");
             }
         });
-        return false; //for at undgå at knappen poster data (default behavior).
+        return false;
     }
 
+    // Adds all the DB users into a table on the webpage
+    function addUserlist(data) {
+        var idArray = data.split(",");
+
+        var i;
+        for (i = 0 ; i < idArray.length ; i++){
+            ajaxGet(idArray[i]);
+        }
+    }
+
+    // Deletes a user from the database
     function ajaxDelete(id) {
         $.ajax({
             url : 'rest/useradmin/delete/' + id,
             type : 'POST',
-            //dataType : 'json', // TODO datatype?
             success : function(data){
-                // TODO slet række i html
-                //deleteRow(data);
+
             },
             error : function(data){
-                alert("An unexpected error has occured");
+                alert("An unexpected error has occured: DELETE_ERROR");
             }
         });
-        return false; //for at undgå at knappen poster data (default behavior).
+        return false;
     }
 
-    function addRow(data) {
+    // Creates a button for deleting a row on the webpage
+    function makeDeleteButton(id){
+        var btn = document.createElement('input');
+        btn.type = "button";
+        btn.name = "deletebutton";
+        btn.value = "Delete";
+        btn.onclick = (function() {deleteRow(this, id)});
+        return btn;
+    }
 
-        alert("heeeu " + data.username);
+    // Creates a button for updating a row on the webpage
+    function makeUpdateButton(id){
+        var btn = document.createElement('input');
+        btn.type = "button";
+        btn.name = "updatebutton";
+        btn.value = "Update";
+        btn.onclick = (function() {ajaxUpdate(id)});
+        return btn;
+    }
+
+    // Adds a row to the webpage and sorts the table
+    function addRow(data) {
         var table = document.getElementById("myTableData");
 
         var rowCount = table.rows.length;
         var row = table.insertRow(rowCount);
+        row.id = "row" + data.id;
 
-        // TODO få deleteRow til at slette den rigtige bruger
-        row.insertCell(0).innerHTML= '<input type="button" value = "Delete" onClick="Javacsript:deleteRow(this)">';
+        //row.insertCell(0).innerHTML= '<input type="button" name="deletebutton" value = "Delete" onClick="Javacsript:deleteRow(this,' + data.id + ')">';
+        row.insertCell(0).appendChild(makeDeleteButton(data.id));
         row.insertCell(1).innerHTML= data.id;
         row.insertCell(2).innerHTML= data.username;
         row.insertCell(3).innerHTML= data.initials;
@@ -123,28 +148,25 @@ $(function() {
         }
         row.insertCell(4).innerHTML= rolesList;
 
+        row.insertCell(5).appendChild(makeUpdateButton(data.id));
+
+        sortTable();
+
     }
 
-    function deleteRow(obj) {
+    // Deletes a row from the webpage
+    function deleteRow(obj, id) {
         var index = obj.parentNode.parentNode.rowIndex;
         var table = document.getElementById("myTableData");
         table.deleteRow(index);
+        ajaxDelete(id);
     }
 
-    function addUserlist(data) {
-        var idArray = data.split(",");
-
-        var i;
-        for (i = 0 ; i < idArray.length ; i++){
-            addRow(ajaxGet(i));
-        }
-    }
-
-// '{"id" : "tre", "name" : "etnavn", "amount" : "mange"}'
-    function jsonString(){
+    // Creates a String-json object from the form
+    function jsonString(id){
         var json = '';
         json +=
-            '{\"id\" : null, ' +
+            '{\"id\" : ' + id + ', ' +
             '\"username\" : \"' + $('#username').val() + '\", ' +
             '\"initials\" : \"' + $('#initials').val() + '\", ' +
             '\"roles\" : [';
@@ -183,5 +205,42 @@ $(function() {
 
         return json;
     }
+
+    // Sorts the table (update this to be a merge-sort for epic speed)
+    function sortTable() {
+        var table, rows, hasSwitched, x, y;
+        table = document.getElementById("myTableData");
+        hasSwitched = true;
+
+        while (hasSwitched) {
+            hasSwitched = false;
+            rows = table.rows;
+
+            for (var i = 1; i < (rows.length - 1); i++) {
+                x = rows[i].getElementsByTagName("TD")[1];
+                y = rows[i + 1].getElementsByTagName("TD")[1];
+
+                if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    hasSwitched = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    // Old method for deleting all users
+    function deleteAllUsers() {
+        var buttons = document.getElementsByName("deletebutton");
+
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].click();
+        }
+    }
 });
+
+
+
+
+
 

@@ -24,14 +24,20 @@ public class UserDAOCDIO3 implements IUserDAO {
     }
 
     @Override
-    public void createUser(IUserDTO user){
+    public int createUser(IUserDTO user){
+        int id = -1;
         try (Connection c = createConnection()) {
 
             PreparedStatement statement = c.prepareStatement(
-                            "INSERT INTO cdio3_users (userName, ini) VALUES (?, ?);");
+                            "INSERT INTO cdio3_users (userName, ini) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getIni());
             statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()){
+                id = rs.getInt(1);
+            }
 
             for (int n=0 ; n < user.getRoles().size() ; n++) {
                 statement = c.prepareStatement(
@@ -43,6 +49,7 @@ public class UserDAOCDIO3 implements IUserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return id;
     }
 
     @Override

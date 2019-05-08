@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    $('#maincontainer').load("showUsersSimple.html");
+    $('#maincontainer').load("showUsers.html");
 });
