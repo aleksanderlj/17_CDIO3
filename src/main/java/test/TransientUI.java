@@ -10,7 +10,7 @@ public class TransientUI {
     private TUI tui = new TUI();
     public void ChooseTorP() throws IUserDAO.DALException {
         System.out.println("Menu:\n"
-                + "1.Transient data\n"
+                + "1. Transient data\n"
                 + "2. Persistent data\n");
 
         int choice = sc.nextInt();

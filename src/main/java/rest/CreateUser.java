@@ -5,27 +5,78 @@ import dal.UserDAOCDIO3;
 import dal.dto.IUserDTO;
 import dal.dto.UserDTO;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-@Path("createuser")
+@Path("useradmin")
 public class CreateUser {
+    IUserDAO db = new UserDAOCDIO3();
 
-    // http://localhost:8080/17_CDIO3_war_exploded/rest/createuser
     @POST
-    public String createUser(@FormParam("userName") String userName,
-                           @FormParam("ini") String ini) throws IUserDAO.DALException {
-        IUserDAO sql = new UserDAOCDIO3();
-        IUserDTO u1 = new UserDTO();
+    @Path("create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String createUser(JSONUser user) throws IUserDAO.DALException {
+        IUserDTO dbUser = new UserDTO();
+        dbUser.setUserName(user.getUsername());
+        dbUser.setIni(user.getInitials());
+        dbUser.setRoles(Arrays.asList(user.getRoles()));
 
-        u1.setUserName(userName);
-        u1.setIni(ini);
-        u1.addRole("Admin");
+        return Integer.toString(db.createUser(dbUser));
+    }
 
-        sql.createUser(u1);
+    @POST
+    @Path("delete/{id}")
+    public void deleteUser(@PathParam("id") String id) throws IUserDAO.DALException {
+        db.deleteUser(Integer.parseInt(id));
+    }
 
-        //return "Name: " + userName + "\nInitials: " + ini;
-        return u1.getUserName();
+    @GET
+    @Path("getuser/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JSONUser getUser(@PathParam("id") String id) throws IUserDAO.DALException {
+        IUserDTO dbUser = db.getUser(Integer.parseInt(id));
+
+        return new JSONUser(
+                Integer.toString(Integer.parseInt(id)),
+                dbUser.getUserName(),
+                dbUser.getIni(),
+                dbUser.getRoles().toArray(new String[0]));
+    }
+
+    @POST
+    @Path("updateuser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateUser(JSONUser user) throws IUserDAO.DALException {
+        IUserDTO dbUser = new UserDTO();
+        dbUser.setUserId(Integer.parseInt(user.getId()));
+        dbUser.setUserName(user.getUsername());
+        dbUser.setIni(user.getInitials());
+        dbUser.setRoles(Arrays.asList(user.getRoles()));
+
+        db.updateUser(dbUser);
+    }
+
+    @GET
+    @Path("userlist")
+    public String getUserlist() throws IUserDAO.DALException {
+        List<IUserDTO> list = db.getUserList();
+        StringBuilder sArray = new StringBuilder();
+
+        if (!list.isEmpty()) {
+            for (int n = 0; n < list.size(); n++) {
+                sArray.append(list.get(n).getUserId());
+                sArray.append(",");
+            }
+
+            sArray.deleteCharAt(sArray.length() - 1);
+
+            return sArray.toString();
+        } else{
+            return null;
+        }
     }
 }

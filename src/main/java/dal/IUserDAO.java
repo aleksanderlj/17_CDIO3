@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IUserDAO {
     //Create
-    void createUser(IUserDTO user) throws DALException;
+    int createUser(IUserDTO user) throws DALException;
     //Read
     IUserDTO getUser(int userId) throws DALException;
     List<IUserDTO> getUserList() throws DALException;

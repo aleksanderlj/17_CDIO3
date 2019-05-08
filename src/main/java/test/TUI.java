@@ -5,6 +5,7 @@ import dal.UserDAOCDIO3;
 import dal.dto.IUserDTO;
 import dal.dto.UserDTO;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -21,14 +22,17 @@ public class TUI {
         Scanner stop = new Scanner(System.in);
         IUserDAO userDAO = new UserDAOCDIO3();
         String choice;
+
         do {
-            System.out.println("Menu:\n"
+            System.out.println(
+                    "Menu:\n"
                     + "1. Show user\n"
                     + "2. Show all users\n"
                     + "3. Create user\n"
                     + "4. Edit user\n"
                     + "5. Delete user\n"
-                    + "6. Close program\n");
+                    + "6. Close program\n"
+            );
 
             choice = sc.nextLine();
 
@@ -53,7 +57,7 @@ public class TUI {
                     break;
 
                 case "3": // Opret bruger
-                    userDAO.createUser(createUserDTO());
+                    System.out.println(userDAO.createUser(createUserDTO()));
                     break;
 
                 case "4": // Opdater bruger
@@ -218,6 +222,17 @@ public class TUI {
 
 
         return chosenUser;
+    }
+
+    public static void testMethod() throws IUserDAO.DALException {
+        UserDAOCDIO3 db = new UserDAOCDIO3();
+        UserDTO user = new UserDTO();
+        user.setUserName("Henrik");
+        user.setIni("Test4");
+        List roles = new ArrayList<String>();
+        roles.add("Admin");
+        user.setRoles(roles);
+        db.createUser(user);
     }
 
 }

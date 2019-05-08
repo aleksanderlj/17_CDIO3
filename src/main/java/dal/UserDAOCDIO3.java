@@ -9,19 +9,35 @@ import java.util.List;
 
 public class UserDAOCDIO3 implements IUserDAO {
     private Connection createConnection() throws SQLException {
-        return  DriverManager.getConnection("jdbc:mysql://ec2-52-30-211-3.eu-west-1.compute.amazonaws.com/s185118?"
-                + "user=s185118&password=SNX64wUCCqEHKNVwEwumg");
+        String dbName = ("s185118");
+        String userName = ("s185118");
+        String password = ("SNX64wUCCqEHKNVwEwumg");
+        String hostname = ("ec2-52-30-211-3.eu-west-1.compute.amazonaws.com");
+        String port = ("3306");
+        String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return  DriverManager.getConnection(jdbcUrl);
     }
 
     @Override
-    public void createUser(IUserDTO user){
+    public int createUser(IUserDTO user){
+        int id = -1;
         try (Connection c = createConnection()) {
 
             PreparedStatement statement = c.prepareStatement(
-                            "INSERT INTO cdio3_users (userName, ini) VALUES (?, ?);");
+                            "INSERT INTO cdio3_users (userName, ini) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getIni());
             statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()){
+                id = rs.getInt(1);
+            }
 
             for (int n=0 ; n < user.getRoles().size() ; n++) {
                 statement = c.prepareStatement(
@@ -33,6 +49,7 @@ public class UserDAOCDIO3 implements IUserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return id;
     }
 
     @Override
